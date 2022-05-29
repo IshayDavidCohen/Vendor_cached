@@ -2,22 +2,25 @@ import React, {useState} from 'react'
 import { SafeAreaView, Text, Image, StyleSheet, useWindowDimensions, View, ScrollView} from 'react-native'
 import CustomInput from '../../components/CustomInput'
 import CustomButton from '../../components/CustomButton/CustomButton'
+import { useNavigation } from '@react-navigation/native'
 
 const NewPasswordScreen = () => {
 const [code, setCode] = useState('');
 const [newPassword, setNewPassword] = useState('');   
 
+const navigation = useNavigation();
+
 const onSubmit = () => {
-    console.warn('onSubmit function')
+    navigation.navigate('SignIn');
 }
 
 const onBackToSignIn = () => {
-    console.warn('Back to sign in function')
+    navigation.navigate('SignIn');
 }
     return (
         <ScrollView>
             <SafeAreaView style={styles.root}>
-                <Text style={styles.title}>Reset your password</Text>
+                <Text style={styles.title}>Enter the code</Text>
         
                 <CustomInput placeholder='Code' value={code} setValue={setCode}/>
                 <CustomInput placeholder={'Enter your new password'} value={newPassword} setValue={setNewPassword}/>                

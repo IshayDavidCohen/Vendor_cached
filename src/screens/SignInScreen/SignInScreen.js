@@ -1,26 +1,30 @@
 import React, {useState} from 'react'
 import { SafeAreaView, Text, Image, StyleSheet, useWindowDimensions, View, ScrollView} from 'react-native'
 import Logo from '../../../assets/images/placeholder-login.png'
+
 import CustomInput from '../../components/CustomInput'
 import CustomButton from '../../components/CustomButton/CustomButton'
 import SocialSignInButton from '../../components/SocialSignInButton'
+import { useNavigation } from '@react-navigation/native'
 
 const SignInScreen = () => {
 const [username, setUsername] = useState('');
 const [password, setPassword] = useState('');
     
-const {height} = useWindowDimensions()
+const {height} = useWindowDimensions();
+const navigation = useNavigation();
 
 const onSignInPressed = () => {
-    console.warn('Sign In');
+    // validate user
+    navigation.navigate('Home');
 }
 
 const onForgotPasswordPressed = () => {
-    console.warn('Forgot pressed')
+    navigation.navigate('ResetPassword');
 }
 
 const onSignUp = () => {
-    console.warn('Sign up function')
+    navigation.navigate('SignUp');
 }
     return (
         <ScrollView>

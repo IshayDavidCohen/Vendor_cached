@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import { SafeAreaView, Text, Image, StyleSheet, useWindowDimensions, View, ScrollView} from 'react-native'
 import CustomInput from '../../components/CustomInput'
 import CustomButton from '../../components/CustomButton/CustomButton'
+import { useNavigation } from '@react-navigation/native'
 
 const SignUpScreen = () => {
 const [username, setUsername] = useState('');
@@ -12,13 +13,15 @@ const [address, setAddress] = useState('');
 const [bn, setBn] = useState('');
 const [phoneNumber, setPhoneNumber] = useState('');
 const [zip, setZip] = useState('');
-    
-const onSignUp = () => {
-    console.warn('Sign up function')
+
+const navigation = useNavigation();
+
+const onRegistration = () => {
+    navigation.navigate('ConfirmEmail');
 }
 
 const onMoveToSignIn = () => {
-    console.warn('Move To Sign In Function')
+    navigation.navigate('SignIn');
 }
 
 const onTermsofUse = () => {
@@ -41,7 +44,7 @@ const onPrivacy = () => {
                 <CustomInput placeholder='Business Number' value={bn} setValue={setBn}/>
                 <CustomInput placeholder='Business Phone Number' value={phoneNumber} setValue={setPhoneNumber}/>
                 <CustomInput placeholder='Zip Code' value={zip} setValue={setZip}/>
-                <CustomButton text='Create account' onPress={onSignUp}/>
+                <CustomButton text='Create account' onPress={onRegistration}/>
 
                 <Text style={styles.text}>By registering, you confirm that you accept our 
                 <Text style={styles.link} onPress={onTermsofUse}> Terms of Use</Text> and 

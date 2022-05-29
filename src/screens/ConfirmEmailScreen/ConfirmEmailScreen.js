@@ -2,12 +2,15 @@ import React, {useState} from 'react'
 import { SafeAreaView, Text, Image, StyleSheet, useWindowDimensions, View, ScrollView} from 'react-native'
 import CustomInput from '../../components/CustomInput'
 import CustomButton from '../../components/CustomButton/CustomButton'
+import { useNavigation } from '@react-navigation/native'
 
 const ConfirmEmailScreen = () => {
 const [code, setCode] = useState('');
-    
+
+const navigation = useNavigation();
+
 const onConfirm = () => {
-    console.warn('Confirmed Function')
+    navigation.navigate('SignIn')
 }
 
 const onResend = () => {
@@ -15,7 +18,7 @@ const onResend = () => {
 }
 
 const onBackToSignIn = () => {
-    console.warn('Back to sign in function')
+    navigation.navigate('SignIn')
 }
     return (
         <ScrollView>
