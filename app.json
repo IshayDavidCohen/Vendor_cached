@@ -17,7 +17,12 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.qwiky.qwikyplaceholder",
+      "buildNumber": "0.0.1",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Supplier to store marketplace app"
+      }
     },
     "android": {
       "adaptiveIcon": {
