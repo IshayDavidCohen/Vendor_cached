@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 4,
     borderTopRightRadius: 4,
     marginBottom: Platform.select({ ios: 0, android: 1 }), // Prevent a random Android rendering issue
-    resizeMode: 'stretch'
+    resizeMode: 'contain'
   },
   header: {
     color: "#222",
