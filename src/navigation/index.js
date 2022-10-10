@@ -10,6 +10,7 @@ import ConfirmEmailScreen from '../screens/ConfirmEmailScreen';
 import ResetPasswordScreen from '../screens/ResetPasswordScreen';
 import NewPasswordScreen from '../screens/NewPasswordScreen';
 import Marketplace from '../screens/Marketplace';
+import Profile from '../screens/ProfileScreen/Profile';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,6 +25,7 @@ const Navigation = () => {
             <Stack.Screen name="NewPassword" component={NewPasswordScreen} />
 
             <Stack.Screen name="Home" component={Marketplace} />
+            <Stack.Screen name="Profile" component={Profile} />
         </Stack.Navigator>        
     </NavigationContainer>
   )
