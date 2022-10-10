@@ -1,8 +1,7 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { View, Text} from 'react-native'
+import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Carousel from 'react-native-snap-carousel/src/carousel/Carousel'
-import { Dimensions } from 'react-native-web'
 import CarouselCardItem, { SLIDER_WIDTH, ITEM_WIDTH} from './CarouselItem'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useNavigation } from '@react-navigation/native'
@@ -14,26 +13,31 @@ const carouselNav = () => {
     return {goTo};
 }
 
-const SlideWidget = ({data, onPress}) => {
+const SlideWidget = ({data, onPress, pressResponse, setPressResponse}) => {
     const isCarousel = React.useRef(null)
     
     const hookNav = carouselNav();
-
+    
     const handlePress = (pressEvent, item) => {
         // Executes function, if it has return object with navigateTo, it navigates.
-        const pressReturn = pressEvent();
 
+        if (typeof setPressResponse === 'function') {
+            if (JSON.stringify(item) !== JSON.stringify(pressResponse)) {
+                setPressResponse(item);
+            }
+        }
+        const pressReturn = pressEvent(item);
+        
         if (typeof pressReturn === 'object') {
             if ('navigateTo' in pressReturn) {
                 hookNav.goTo(pressReturn['navigateTo'], item['title'])
             }
         }
-        return pressReturn;
     }
 
     const _renderItem = ({item, index}) => {
         return (
-            <TouchableOpacity onPress={() => handlePress(onPress, item)}>
+            <TouchableOpacity onPress={() => {handlePress(onPress, item)}}>
                 {CarouselCardItem({item, index})}
             </TouchableOpacity>
         )};
