@@ -4,13 +4,17 @@ import CustomButton from '../../components/CustomButton/CustomButton'
 import { useNavigation } from '@react-navigation/native'
 import PopulateMarket from './Populate'
 
-
 const Marketplace = () => {
 
   const navigation = useNavigation();
+
+  const moveToViewAll = (category) => {
+    navigation.navigate('View', {'category': category});
+  }
+
   const [marketData, setMarketData] = useState([]);
   useEffect(async () => {
-    setMarketData(await PopulateMarket());
+    setMarketData(await PopulateMarket(moveToViewAll));
     console.log("Marketplace rendered")
   }, [setMarketData])
   const onSignIn = () => {
