@@ -11,6 +11,7 @@ import ResetPasswordScreen from '../screens/ResetPasswordScreen';
 import NewPasswordScreen from '../screens/NewPasswordScreen';
 import Marketplace from '../screens/Marketplace';
 import Profile from '../screens/ProfileScreen/Profile';
+import ViewScreen from '../screens/ViewScreen/ViewScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,6 +27,7 @@ const Navigation = () => {
 
             <Stack.Screen name="Home" component={Marketplace} />
             <Stack.Screen name="Profile" component={Profile} />
+            <Stack.Screen name="View" component={ViewScreen} />
         </Stack.Navigator>        
     </NavigationContainer>
   )
