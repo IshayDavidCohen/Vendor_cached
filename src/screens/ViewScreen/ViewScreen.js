@@ -1,38 +1,23 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { SafeAreaView} from 'react-native'
+import { useState, useEffect } from 'react'
 import React from 'react'
+import ViewList from '../../components/ViewList/ViewList'
+import { getViewData} from '../../utils/firebase/Database'
+
 
 const ViewScreen = ({route, navigation}) => {
-  console.log(route.params.category)
+
+  const navigate = (path) => {
+    navigation.navigate('Profile', {'storeName': path})
+  }
+
+  const [viewData, setViewData] = useState([]);
+  useEffect(async () => { setViewData(await getViewData(route.params.category)); }, [setViewData] );
   return (
-    <View style={{width: '100%', flexDirection: 'row'}}>
-      <Text style={styles.category}>ViewScreen </Text>
-      <View style={styles.viewContainer}>
-           <Text style={styles.viewTitle}> View All</Text>
-       </View>
-    </View>
+    <SafeAreaView>
+      <ViewList data={viewData} onPress={navigate} type='SINGLE'/>
+    </SafeAreaView>
   )
 }
-
-const styles = StyleSheet.create({
-    category: {
-        flex: 1,
-        margin: 10,
-        fontSize: 18,
-        fontWeight: 'bold',
-        color: '#3896DB',
-      },
-    viewContainer: {
-        borderRadius: 5,
-        padding: 5,
-        marginRight: 15,
-        backgroundColor: '#c8e2f4',
-        alignSelf: 'center',
-    },
-    viewTitle: {
-        fontSize: 12,
-        color: '#469BDA',
-        fontWeight: 'normal',
-    },
-});
 
 export default ViewScreen
