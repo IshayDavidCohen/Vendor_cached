@@ -1,6 +1,7 @@
-import { getDatabase, ref, set, get, orderByKey, query} from "firebase/database";
+import { getDatabase, ref, set, get, query, orderByChild, equalTo} from "firebase/database";
 import { app, Database } from "./Firebase";
-// TODO check if it inits
+
+// TODO: Fix getDatabase instance.
 
 const insertData = (profileId, profile) => {
     const Database = getDatabase();
@@ -16,17 +17,29 @@ const readData = async (profileId, searchKey) => {
     return snapshot.val();
 }
 
-const getDataByKey = async (searchKey) => {
+const getDataByKey = async (searchKey, value) => {
+   /**
+    * getDataByKey(searchKey: 'string', value: 'string') backend function that retrieves data using an indexed key in Firebase Realtime Database.
+    *  Requirement: 'searchKey' variable must be included in Firebases RealTime Database Rules inside .indexOn: [].
+    *  Passing a second arg will only yield results if the searchKey === value (Type included; WARNINGS for int/float to str comparison)
+    * 
+    * @param {searchKey} string
+    * @param {value} string (Optional)
+   */
     const Database = getDatabase();
     const keyRef = ref(Database, "profiles");
+    
+    const queryConstraints = [orderByChild(searchKey)]
+    if (value !== undefined) {
+        queryConstraints.push(equalTo(value))
+    }
 
-    const q = query(keyRef, orderByKey(searchKey));
-    const snapshot = await get(q);
+    const snapshot = await get(query(keyRef, ...queryConstraints));
     return snapshot.val();
 }
 
 export const getMarketplaceData = async () => {
-    // Needs rework as data changed
+    // Needs rework on retrieval part
     const data = await getDataByKey('Category');
     let marketData = {};
     Object.values(data).map((item) => {
@@ -38,4 +51,4 @@ export const getMarketplaceData = async () => {
     return marketData
 }
 
-export { readData, insertData, getDataByKey}
+export { readData, insertData, getDataByKey }
