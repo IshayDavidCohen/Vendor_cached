@@ -38,7 +38,7 @@ const getDataByKey = async (searchKey, value) => {
     return snapshot.val();
 }
 
-export const getMarketplaceData = async () => {
+const getMarketplaceData = async () => {
     // Needs rework on retrieval part
     const data = await getDataByKey('Category');
     let marketData = {};
@@ -51,4 +51,4 @@ export const getMarketplaceData = async () => {
     return marketData
 }
 
-export { readData, insertData, getDataByKey }
+export { readData, insertData, getDataByKey, getMarketplaceData}
