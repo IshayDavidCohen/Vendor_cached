@@ -51,4 +51,16 @@ const getMarketplaceData = async () => {
     return marketData
 }
 
-export { readData, insertData, getDataByKey, getMarketplaceData}
+const getViewData = async (categoryType) => {
+    /**
+     * getViewData uses getDataByKey which filters by key and compares to categoryType.
+     * This filters all relevant store and returns only the ones that contain the category of 'categoryType' var
+     *  Requirement: 'Category' string variable must be included in Firebases RealTime Database Rules inside .indexOn: [].
+     * @param {categoryType} string
+   */
+    const data = await getDataByKey('Category', categoryType);
+    return Object.values(data).map(v => {return v.Info})
+}
+
+ 
+export { readData, insertData, getDataByKey, getMarketplaceData, getViewData}
