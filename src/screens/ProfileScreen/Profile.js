@@ -6,8 +6,10 @@ import SlideWidget from '../../components/SlideWidget/SlideWidget'
 import BottomSheet from '../../components/BottomSheet/BottomSheet'
 import CounterWidget from '../../components/CounterWidget/CounterWidget';
 import CustomButton from '../../components/CustomButton/CustomButton';
+import Ratings from '../../components/Ratings';
 
 // TODO: Take care of price in currency to unit
+// BUG: When using Bottom sheet and increasing item quantity if it is 0 and a character is pressed the total is turned into NaN
 
 const { height: SCREEN_HEIGHT } = Dimensions.get('window')
 const POPUP_HEIGHT = -SCREEN_HEIGHT * 0.45;
@@ -16,6 +18,7 @@ const Profile = ({route, navigation}) => {
   const ref = useRef(null);
   const [itemPressed, setItemPressed] = useState({});
   const [count, setCount] = useState('0');
+  const [rating, setRatings] = useState(0);
 
   const onPress = useCallback(() => {
     const isActive = ref?.current?.isActive();
@@ -46,6 +49,7 @@ const Profile = ({route, navigation}) => {
     // Might be a performance problem in the future.
   }, [PopulateProfile, setItemPressed, itemPressed])
   console.log(count);
+  console.log(rating);
   return (
     <SafeAreaView>
       <TouchableOpacity activeOpacity={1} onPress={() => {
@@ -53,11 +57,9 @@ const Profile = ({route, navigation}) => {
           onPress()
         }
         }}>
-        <Text>Store Name</Text>
-        <Text>Overall</Text>
-        <Text>Shipping Time</Text>
-        <Text>Shipping Quantity</Text>
-        <Text>Price</Text>
+        <Ratings text='Overall   '/>
+        <Ratings text='Shipping'/>
+        <Ratings text='Product  '/>
       </TouchableOpacity>
       {profileProps}
 
