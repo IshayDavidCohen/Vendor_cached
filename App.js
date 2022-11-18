@@ -2,12 +2,15 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, SafeAreaView} from 'react-native';
 import React, { Component } from 'react';
 
-import Navigation from './src/navigation';
+import Navigation from './src/navigation'
+import { NavigationContainer } from '@react-navigation/native';
 
 export default function App() {
   return (
     <SafeAreaView style={styles.root}>
-      <Navigation/>
+      <NavigationContainer>
+        <Navigation/>
+      </NavigationContainer>
     </SafeAreaView>
   );
 }

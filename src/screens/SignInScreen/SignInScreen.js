@@ -16,7 +16,7 @@ const navigation = useNavigation();
 
 const onSignInPressed = () => {
     // validate user
-    navigation.navigate('Home');
+    navigation.navigate('Marketplace');
 }
 
 const onForgotPasswordPressed = () => {
