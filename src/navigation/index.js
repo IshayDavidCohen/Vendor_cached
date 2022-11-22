@@ -14,6 +14,7 @@ import NewPasswordScreen from '../screens/NewPasswordScreen';
 import Marketplace from '../screens/Marketplace';
 import Profile from '../screens/ProfileScreen/Profile';
 import ViewScreen from '../screens/ViewScreen/ViewScreen';
+import GlobalParams from '../components/GlobalParams/GlobalParams';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -61,6 +62,7 @@ const TabNav = () => {
 
 const Navigation = () => {
   return (
+    <GlobalParams>
     <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName={Signed ? "Marketplace" : "SignIn"}>
       <Stack.Screen name="SignIn" component={SignInScreen} />
       <Stack.Screen name="SignUp" component={SignUpScreen} />
@@ -72,6 +74,8 @@ const Navigation = () => {
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="View" component={ViewScreen} />
     </Stack.Navigator>
+    </GlobalParams>
+
   )
 }
 
