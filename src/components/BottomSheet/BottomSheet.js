@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet, Text, View,SafeAreaView } from 'react-native';
+import { Dimensions, StyleSheet, Text, View,SafeAreaView, TouchableOpacity } from 'react-native';
 import React, { useCallback, useEffect, useImperativeHandle, useState} from 'react';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming, withSpring, abs} from 'react-native-reanimated';
@@ -49,11 +49,12 @@ const BottomSheet = React.forwardRef(({children}, ref) => {
             transform: [{ translateY: translateY.value}],
         };
     });
-
     return (
         <GestureDetector gesture={gesture}>
             <Animated.View style={[styles.bottomSheetContainer, rBottomSheetStyle]}>
+                <TouchableOpacity onPress={() => {scrollTo(0)}}>
                 <View style={styles.line}/>
+                </TouchableOpacity>
                 {children}
             </Animated.View>
         </GestureDetector>
