@@ -1,6 +1,6 @@
 import { Text, View, StyleSheet } from 'react-native'
 import React, {useState, useEffect, useCallback, useRef} from 'react'
-import { getMarketplaceData, readData} from '../../utils/firebase/Database'
+import { getMarketplaceData, readData, getProfile} from '../../utils/firebase/Database'
 import SlideWidget from '../../components/SlideWidget/SlideWidget'
 
 
@@ -27,6 +27,14 @@ const PopulateMarket = async (moveToViewAll) => {
 export const PopulateProfile = async (profileName) => {  
   const data = await readData(profileName);
   return data['Items'];
+}
+
+export const populateSearch = async () => {
+  const allStores = await readData('');
+for (const [key, value] of Object.entries(allStores)) {
+    allStores[key] = value.Info
+    }
+  return allStores
 }
 
 const styles = StyleSheet.create({
