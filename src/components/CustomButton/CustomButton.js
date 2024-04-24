@@ -1,13 +1,15 @@
 import { Pressable, Text, StyleSheet } from 'react-native'
 import React from 'react'
 
-const CustomButton = ({onPress, text, type = 'PRIMARY', bgColor, fgColor}) => {
+const CustomButton = ({onPress, text, type = 'PRIMARY', bgColor, fgColor, objWidth='80%', bRadius}) => {
   return (
     <Pressable onPress={onPress}
     style={[
         styles.container,
         styles[`container_${type}`],
-        bgColor ? {backgroundColor: bgColor} : {}]}>
+        bgColor ? {backgroundColor: bgColor} : {},
+        objWidth ? {width: objWidth} : {},
+        bRadius ? {borderRadius: bRadius} : {}]}>
       <Text 
       style={[
           styles.text,
@@ -31,8 +33,12 @@ const styles = StyleSheet.create({
     container_SECONDARY: {
         borderColor: '#3B71F3',
         borderWidth: 2,
-
-    },      
+    },
+    container_OVAL: {
+        borderRadius: 15,
+        borderWidth: 2,
+        borderColor: 'rgba(0,0,0, 0.22)'
+    },
     text: {
         fontWeight: 'bold',
         color: 'white'
