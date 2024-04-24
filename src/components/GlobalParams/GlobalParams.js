@@ -9,7 +9,8 @@ export const getState = () => {
 const GlobalParams = ({children}) => {
 
     const [userParams, setUserParams] = useState({
-        'cart': {}
+        'cart': {},
+        'user': {},
     });
 
     const valueProvider = useMemo(() => ({userParams, setUserParams}), [userParams, setUserParams]);
