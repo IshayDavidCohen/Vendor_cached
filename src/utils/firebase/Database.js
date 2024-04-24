@@ -3,10 +3,17 @@ import { app, Database } from "./Firebase";
 
 // TODO: Fix getDatabase instance.
 
-const insertData = (profileId, profile) => {
+export const insertData = (dbSection, profileID, profileDocument) => {
     const Database = getDatabase();
-    const reference = ref(Database, 'profiles/' + profileId);
-    set(reference, profile); // Writes dictionary into the reference (DB)
+    const reference = ref(Database, dbSection + '/' + profileID);
+    set(reference, profileDocument); // Writes dictionary into the reference (DB)
+}
+
+export const insertKey = (dbSection, profileID, keyName, keyValue) => {
+    const Database = getDatabase();
+    const reference = ref(Database, dbSection + '/' + profileID + '/' + keyName);
+    set(reference, keyValue); // Writes specific key value into profileDocument
+
 }
   
 const readData = async (profileId, searchKey) => {
@@ -15,6 +22,24 @@ const readData = async (profileId, searchKey) => {
     const keyRef = ref(Database, 'profiles/' + profileId + searchKey);
     const snapshot = await get(keyRef);
     return snapshot.val();
+}
+
+export const getProfile = async (dbSection, profileID, searchKey) => {
+    const Database = getDatabase();
+    searchKey = (searchKey == null) ? '' : `/${searchKey}`;
+    const keyRef = ref(Database, dbSection + '/' + profileID + searchKey);
+    const snapshot = await get(keyRef);
+    return snapshot.val();
+}
+
+export const getProfileInfo = async (profileID) => {
+    let profileInfo = {};
+    const profile = await getProfile('profiles', profileID);
+    profileInfo['banner'] = profile['banner'];
+    profileInfo['icon'] = profile['icon'];
+    profileInfo['Address'] = profile['Address'];
+
+    return profileInfo
 }
 
 const getDataByKey = async (searchKey, value) => {
@@ -62,5 +87,18 @@ const getViewData = async (categoryType) => {
     return Object.values(data).map(v => {return v.Info})
 }
 
+export const getStoreNames = async () => {
+    const data = await readData('')
+    return Object.keys(data)
+}
+
+export const getCategories = async() => {
+
+    const Database = getDatabase();
+    const keyRef = ref(Database, 'categories/');
+    const snapshot = await get(keyRef);
+
+    return await snapshot.val();
+}
  
-export { readData, insertData, getDataByKey, getMarketplaceData, getViewData}
+export { readData, getDataByKey, getMarketplaceData, getViewData}
