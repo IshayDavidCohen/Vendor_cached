@@ -17,7 +17,7 @@ const ViewList = ({data, onPress = () => {}, type = 'DUAL'}) => {
     const count = (type === 'DUAL') ? 2 : 1
     const flatlistProps = (count > 1) ? {columnWrapperStyle: {justifyContent: 'space-between'}} : {}
     return (
-        <View>
+        <View style={{height:'100%'}}>
             <FlatList key={'_ViewList'} data={data} renderItem={({ item }) => <_renderItem item={item} type={type} onPress={onPress}/>} numColumns={count} keyExtractor={item => item.title.toString()} {...flatlistProps}/>
         </View>
     )
