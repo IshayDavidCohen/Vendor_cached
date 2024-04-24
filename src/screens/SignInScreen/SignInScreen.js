@@ -14,6 +14,10 @@ const [password, setPassword] = useState('');
 const {height} = useWindowDimensions();
 const navigation = useNavigation();
 
+const onDevPressed = () => {
+    navigation.navigate('DevScreen')
+}
+
 const onSignInPressed = () => {
     // validate user
     navigation.navigate('Marketplace');
@@ -36,6 +40,7 @@ const onSignUp = () => {
                 <CustomInput placeholder='Username' value={username} setValue={setUsername}/>
                 <CustomInput placeholder='Password' value={password} setValue={setPassword} secureTextEntry={true}/>
                 
+                <CustomButton text='DevScreen Placeholder' onPress={onDevPressed}/>
                 <CustomButton text='Sign In' onPress={onSignInPressed}/>
                 <CustomButton text='Forgot Password?' onPress={onForgotPasswordPressed} type='TERITARY'/>
             
